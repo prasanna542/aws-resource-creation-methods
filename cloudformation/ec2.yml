@@ -1,0 +1,25 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Create EC2 instance using CloudFormation
+
+Parameters:
+  KeyName:
+    Type: String
+    Description: Existing EC2 KeyPair name
+
+Resources:
+  EC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: ami-0b6c6ebed2801a5cb
+      InstanceType: t3.micro
+      KeyName: !Ref KeyName
+      Tags:
+        - Key: Name
+          Value: cf-ec2-instance
+        - Key: Environment
+          Value: dev
+
+Outputs:
+  InstanceId:
+    Description: EC2 Instance ID
+    Value: !Ref EC2Instance
